@@ -4,6 +4,9 @@
  */
 package entities;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,6 +16,8 @@ import com.badlogic.gdx.math.Vector2;
 public class Entity {
     protected Vector2 position;
     protected String name;
+    protected Texture texture;
+    protected Sprite sprite;
     
     
     public Entity(String name){
@@ -21,6 +26,30 @@ public class Entity {
         
         
     }
+    
+    
+    public void render(SpriteBatch sb){
+        
+        
+    }
+
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void setTexture(Texture texture) {
+        this.texture = texture;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+    
+    
 
     public Vector2 getPosition() {
         return position;

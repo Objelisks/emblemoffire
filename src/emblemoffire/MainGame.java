@@ -21,6 +21,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.TimeUtils;
+import entities.Actor;
 import environment.AbstractEnvironment;
 
 /**
@@ -28,47 +29,39 @@ import environment.AbstractEnvironment;
  * @author Curtis
  */
 public class MainGame implements ApplicationListener {
-    
+
     OrthographicCamera camera;
     SpriteBatch batch;
     AbstractEnvironment world;
-     Texture playerImage;
-    
+    Texture playerImage;
+    Actor cPlayer;
+
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         world = new AbstractEnvironment();
         batch = new SpriteBatch();
-        playerImage = new Texture(Gdx.files.internal("Hector.png"));
-        
+        cPlayer = new Actor("Hector", "Hector.png");
+        world.addActor(cPlayer);
     }
-    
+
     public void resize(int i, int i1) {
     }
-    
+
     public void render() {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
-
-        // tell the camera to update its matrices.
         camera.update();
-
-        // tell the SpriteBatch to render in the
-        // coordinate system specified by the camera.
         batch.setProjectionMatrix(camera.combined);
-        //world.render(batch);
-        batch.begin();
-         batch.draw(playerImage, 100, 100);
-         batch.end();
-
+        world.render(batch);
     }
-    
+
     public void pause() {
     }
-    
+
     public void resume() {
     }
-    
+
     public void dispose() {
     }
 }
