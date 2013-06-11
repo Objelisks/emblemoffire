@@ -29,13 +29,13 @@ import environment.AbstractEnvironment;
  * @author Curtis
  */
 public class MainGame implements ApplicationListener {
-
+    
     OrthographicCamera camera;
     SpriteBatch batch;
     AbstractEnvironment world;
     Texture playerImage;
     Actor cPlayer;
-
+    
     public void create() {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
@@ -44,24 +44,29 @@ public class MainGame implements ApplicationListener {
         cPlayer = new Actor("Hector", "Hector.png");
         world.addActor(cPlayer);
     }
-
+    
     public void resize(int i, int i1) {
     }
-
+    
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0, 0, 0.1f, 1);
         Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         world.render(batch);
+        update(Gdx.graphics.getDeltaTime());
     }
-
+    
+    public void update(float delta) {
+        world.update(delta);
+    }
+    
     public void pause() {
     }
-
+    
     public void resume() {
     }
-
+    
     public void dispose() {
     }
 }

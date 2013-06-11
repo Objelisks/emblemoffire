@@ -28,6 +28,11 @@ public class Entity {
     }
     
     
+    public void update(float delta){
+        
+        
+    }
+    
     public void render(SpriteBatch sb){
         
         
