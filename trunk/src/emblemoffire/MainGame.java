@@ -29,44 +29,56 @@ import environment.AbstractEnvironment;
  * @author Curtis
  */
 public class MainGame implements ApplicationListener {
-    
+
     OrthographicCamera camera;
     SpriteBatch batch;
     AbstractEnvironment world;
     Texture playerImage;
     Actor cPlayer;
-    
+    int WIDTH, HEIGHT;
+    private Rectangle glViewport;
+
     public void create() {
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+        WIDTH = 1200;
+        HEIGHT = 800;
+        camera.setToOrtho(false, WIDTH, HEIGHT);
+      //  camera.position.set(WIDTH / 2, HEIGHT / 2, 0);
+        glViewport = new Rectangle(0, 0, WIDTH, HEIGHT);
         world = new AbstractEnvironment();
         batch = new SpriteBatch();
         cPlayer = new Actor("Hector", "Hector.png");
         world.addActor(cPlayer);
     }
-    
+
     public void resize(int i, int i1) {
     }
-    
+
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0.1f, 1);
-        Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        GL10 gl = Gdx.graphics.getGL10();
+        gl.glClearColor(0.4f, 0.4f, 0.4f, 1);
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
+        gl.glViewport((int) glViewport.x, (int) glViewport.y, (int) glViewport.width, (int) glViewport.height);
         camera.update();
+      //  camera.apply(gl);
+        
+        
+        
         batch.setProjectionMatrix(camera.combined);
         world.render(batch);
         update(Gdx.graphics.getDeltaTime());
     }
-    
+
     public void update(float delta) {
         world.update(delta);
     }
-    
+
     public void pause() {
     }
-    
+
     public void resume() {
     }
-    
+
     public void dispose() {
     }
 }

@@ -23,12 +23,17 @@ public class Actor extends Entity {
         texture = new Texture(Gdx.files.internal(spritePath));
         sprite = new Sprite(texture);
         sprite.setSize(32, 32);
-        sprite.setPosition(200, 200);
+        this.setPosition(5, 5, 31);
     }
     
       public void render(SpriteBatch sb){
      sprite.draw(sb);
         
     }
+      
+      public void setPosition(int x, int y, int scale){
+          sprite.setPosition(x*scale, y*scale);
+          this.position.set(x*scale, y*scale);
+      }
     
 }
